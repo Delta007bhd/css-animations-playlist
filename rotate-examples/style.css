@@ -26,6 +26,7 @@ ul.panels {
 
 ul.panels li {
   position: relative;
+  text-transform: uppercase;
   /* li=parent element which must be other than static to be able to display it's child element(div.front) as absolute */
 }
 
