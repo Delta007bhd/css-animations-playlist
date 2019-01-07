@@ -1,12 +1,13 @@
-/*// MY VERSION OF CODE //*/
+/*// MY VERSION OF CODE USING RESPONSIVE CSS GRID //*/
 body {
   background: #333;
   font-family: verdana, sans-serif;
 }
 
 .wrapper {
-  max-width: 1200px;
+  width: 80vw; /* 80% of viewport width */
   margin: 40px auto;
+  /* top and bottom margin 40px, auto = centered horizontally across the page */
 }
 
 h1 {
@@ -15,126 +16,65 @@ h1 {
   text-align: center;
 }
 
-ul li {
-  list-style-type: none;
-  width: 25%;
-  float: left;
-  font-size: 20px;
-  color: white;
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 2px;
-  cursor: pointer;
-  position: relative; /*see below where front cards are placed absolutely*/
+ul.panels {
+  display: grid;
+  grid-gap: 10px;
+  list-style-type: none; /* to remove list bullets */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  /* creates as much columns as can fit with a min width of 150px */
 }
 
-ul li div {
-  padding: 50% 0; /* top and bottom 50% of width parent li which makes it almost square*/
-}
-
-/*// ANIMATION STYLES //*/
-ul li div.back {
-  transform: rotateY(90deg); /*rotating back card by 90° along Y axis makes the back card invisible*/
-}
-
-ul li div.front {
-  position: absolute;/*removes front card from normal document flow, back card moves up behind front card only if parent element(li) is positioned relative (parent element must be other than static to make position: absolute work) */
-  width: 100%; /*since item is removed from normal document flow, we now have to expand the width to 100%*/
-}
-
-ul li div.front:hover { /* front card is large enough to hover over */
-  animation: flip 1s forwards ease-in;
-}
-
-ul li:hover div.back { /* back card is invisible (rotated 90deg) so hover over li instead */
-  animation: flip 1s 1s forwards ease-out reverse;
-  /*reverse: because back card is already rotated by 90° and we need to turn it back to 0°*/
-}
-
-@-webkit-keyframes flip {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(90deg); }
-}
-@-o-keyframes flip {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(90deg); }
-}
-@-moz-keyframes flip {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(90deg); }
-}
-@keyframes flip {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(90deg); }
-}
-
-/*// ORIGINAL CODE FROM THE NET NINJA: //*/
-/*
-body{
-  background: #333;
-  font-family: verdana;
-}
-
-.wrapper{
-  width: 100%;
-  max-width: 1200px;
-  margin: 40px auto;
-}
-
-h1{
-  color: #fff;
-  font-weight: normal;
-  text-align: center;
-  font-size: 48px;
-}
-
-.panels{
-  list-style-type: none;
-  padding: 0;
-}
-
-.panels li{
+ul.panels li {
   position: relative;
-  width: 25%;
-  margin: 0;
-  display: block;
-  box-sizing: border-box;
-  float: left
+  /* li=parent element which must be other than static to be able to display it's child element(div.front) as absolute */
 }
 
-.panels li div{
-  width: 100%;
+div.front,
+div.back {
   padding: 50% 0;
-  text-align: center;
-  color: #fff;
+  color: white;
   font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  line-height: 0;
+  text-align: center;
   cursor: pointer;
 }
 
 /*// ANIMATION STYLES //*/
-
-.panels div.back {
+div.back {
   transform: rotateY(90deg);
 }
 
-.panels div.front {
+div.front {
+  /* front cards take up width of parent li which gets dynamic grid column width from line 23 */
   position: absolute;
+  /* removes front cards from normal document flow so back cards disappear behind front cards */
+  /* but now width shrinks to fit text */
   width: 100%;
-  }
-
-.panels li:hover div.front {
-  animation: flip 1s ease-in forwards;
+  /* expand width back to full 100% of the dynamic grid column width */
 }
 
-.panels li:hover div.back {
-  animation: flip 1s 1s ease-out forwards reverse;
+ul li div.front:hover {
+  animation: flip 0.5s forwards ease-in;
 }
 
+/* cannot hover over a 90deg rotated card so hover over li container instead but animation is applied to .back */
+ul li:hover div.back {
+  animation: flip 0.5s 0.5s forwards ease-out reverse;
+  /* reverse because back cards are already rotated 90deg (line 43) and need to be rotated back to 0deg */
+}
+
+@-webkit-keyframes flip {
+  from { transform: rotateY(0deg);}
+  to { transform: rotateY(90deg);}
+}
+@-o-keyframes flip {
+  from { transform: rotateY(0deg);}
+  to { transform: rotateY(90deg);}
+}
+@-moz-keyframes flip {
+  from { transform: rotateY(0deg);}
+  to { transform: rotateY(90deg);}
+}
 @keyframes flip {
-  0% {transform: rotateY(0deg);}
-  100% {transform: rotateY(90deg);}
+  from { transform: rotateY(0deg);}
+  to { transform: rotateY(90deg);}
 }
-*/
