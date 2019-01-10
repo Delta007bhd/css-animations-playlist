@@ -118,7 +118,7 @@ header{
   border-bottom: 1px solid #eee;
   background: #fff;
 }
-header:after{
+header:after{ /* Clearfix: https://www.w3schools.com/howto/howto_css_clearfix.asp */
   display: block;
   content: "";
   clear: both;
@@ -130,7 +130,7 @@ header:after{
 .basket li{
   display: inline-block;
   list-style-type: none;
-  width: 30%;
+  /* width: 30%; */ /* more responsive without width */
   margin: 30px 1.5%;
   text-align: center;
 }
@@ -141,10 +141,38 @@ header:after{
 .basket header div{
   float: right;
   position: relative;
-  z-index: 1;
+  z-index: 1; /* makes t-shirt appear behind (into) basket */
 }
 .basket header h1{
   float: left;
 }
 
 /*// BASKET ANIMATION STYLES //*/
+
+.zoom {
+  position: absolute;
+  top: 40px;
+  right: 50%;
+  width: 40px;
+  -webkit-animation: zoom 1s ease-in-out forwards;
+  animation: zoom 1s ease-in-out forwards;
+}
+@-webkit-keyframes zoom {
+  from { opacity: 0; }
+  50% { opacity: 1; }
+  to { opacity: 0; right: 50px; }
+}
+@-o-keyframes zoom {
+  from { opacity: 0; }
+  50% { opacity: 1; }
+  to { opacity: 0; right: 50px; }
+}
+@-moz-keyframes zoom {
+  from { opacity: 0; }
+  50% { opacity: 1; }
+  to { opacity: 0; right: 50px; }
+}
+@keyframes zoom {
+  from { opacity: 0; }
+  50% { opacity: 1; }
+  to { opacity: 0; right: 50px;}
