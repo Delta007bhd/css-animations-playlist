@@ -1,6 +1,6 @@
 /*// POP-UP BASE STYLES //*/
 
-body{margin: 0; position: relative;}
+body{margin: 0; /*position: relative;*/} /* not required */
 body.pop-up{background: #222;}
 *{
   font-family: Calibri, sans-serif;
